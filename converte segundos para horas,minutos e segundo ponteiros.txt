@@ -1,0 +1,21 @@
+//Escreva um programa que receba um número inteiro representando a quantidade total de segundos e, usando passagem de parâmetros por referência, 
+//converta a quantidade informada de segundos em Horas, Minutos e Segundos. Imprima o resultado da conversão no formato HH:MM:SS. Utilize o seguinte protótipo 
+//de função: void converteHora(int total_segundos, int *hora, int *min, int *seg)
+#include <stdio.h>
+void converteHora(int total,int *hora,int *min, int *seg);
+int main(void)
+{
+	int total,h,m,s;
+	printf("total segundos:");
+	scanf("%d",&total);
+	converteHora(total,&h,&m,&s);
+	printf("HH:%d MM:%d SS:%d",h,m,s);
+}
+void converteHora(int total, int *hora, int *min, int *seg)
+{
+	
+	*hora=total/3600;
+	total=total%3600;
+	*min=total/60;
+	*seg=total%60;
+}

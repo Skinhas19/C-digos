@@ -1,0 +1,212 @@
+//Nome:Lucas Santos Monteiro
+
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct nodo
+{
+int dado;
+struct nodo* dir;
+struct nodo* esq;
+} nodo;
+
+/*
+void insere_no_inicio(nodo** inicio, int valor);
+void insere_antes_de_k(nodo** inicio, int valor,int k);
+void exclui_no_inicio(nodo** inicio);
+void exclui_no_fim(nodo** inicio);
+void exclui_k(nodo** inicio,int k);
+int localiza_k(nodo* lista, int k,int log=0);
+void exclui_lista(nodo** lista);
+void ciclar(nodo* lista);
+*/
+void imprime_lista(nodo* inicio);
+void insere_no_fim(nodo** inicio, int valor);
+void tuc_tuc(nodo *inicio,nodo* p);
+void imprime_no(nodo* no);
+void imprime_pre(nodo* inicio);
+void imprime_sim(nodo* inicio);
+void imprime_pos(nodo* inicio);
+int main()
+{
+nodo* lista1 = NULL;
+
+int op=1, valor, k;
+
+while (op != 0)
+{
+	printf("\nMenu:");
+	printf("\n1 - Insere");
+	printf("\n2 - Imprime lista");
+	printf("\n3 - Imprime lista pre-ordem");
+	printf("\n4 - Imprime lista simetrica");
+	printf("\n5 - Imprime lista pos-ordem");
+	printf("\nEscolha uma opcao: ");
+	
+	
+	scanf("%d", &op);
+	
+		switch (op)
+		{
+			
+			case 1:
+				printf("\nDigite o valor a ser inserido: ");
+				scanf("%d", &valor);
+				insere_no_fim(&lista1,valor);
+				break;
+				
+			case 2:
+				imprime_lista(lista1);
+				break;
+			
+			case 3:
+				imprime_pre(lista1);
+				break;
+			case 4:
+				imprime_sim(lista1);
+				break;
+			case 5:
+				imprime_pos(lista1);
+				break;
+				
+			case 0:
+				printf("\nSaindo...");
+				break;
+			
+			default:
+			printf("\n Entrada invalida.\n");
+		}
+} 
+}
+
+//=================================
+//=================================
+//=================================
+//=================================
+
+void imprime_lista(nodo* inicio)
+{
+	nodo* p = inicio;
+	
+	if(p == NULL)
+	{
+		printf("\nLista vazia");
+		return;
+	}//se a lista estiver vazia, avisa e retorna
+	
+	printf("Lista: \n");
+	imprime_no(inicio);
+}
+
+void imprime_no(nodo* no)
+{
+	nodo* p = no;
+	
+	if(p == NULL)
+	{
+		return;
+	}//se a lista estiver vazia, avisa e retorna
+	
+	printf("Lista: \n");
+	printf("DADO: %d, ESQUERDA: %p, MEM: %p, DIREITA: %p\n", p->dado, p->esq, p, p->dir);
+	imprime_no(p->esq);
+	imprime_no(p->dir);
+}
+
+void insere_no_fim(nodo** inicio, int valor)
+{
+	nodo* p = (nodo*)malloc(sizeof(nodo));
+	nodo *aux= *inicio;
+	
+	if (p == NULL)
+	{
+		printf("\nErro ao alocar memoria.");
+	}
+	
+	p->dado = valor;
+	p->dir = NULL;
+	p->esq = NULL;
+	
+	if (*inicio == NULL)
+	{
+		*inicio = p;
+		return;
+	}//se a lista estiver vazia o nÃ³ se torna a nova lista
+	
+	tuc_tuc(aux, p);
+}
+
+void tuc_tuc(nodo *inicio,nodo* p)
+{
+	nodo *aux= inicio;
+
+	if(aux->dado > p->dado)
+		if(aux->esq == NULL)
+			aux->esq=p;
+		else		
+			tuc_tuc(aux->esq, p);
+	else if(aux->dado < p->dado)
+		if(aux->dir == NULL)
+			aux->dir=p;
+		else
+			tuc_tuc(aux->dir,p);
+	else
+		return;
+}
+void imprime_pre(nodo *raiz)
+{
+    if (raiz != NULL)
+    {
+        printf("Info: %d\n", raiz->dado);
+        imprime_pre(raiz->esq);
+        imprime_pre(raiz->dir);
+    }
+}
+
+void imprime_sim(nodo *raiz)
+{
+    if (raiz != NULL)
+    {
+        imprime_sim(raiz->esq);
+        printf("Info: %d\n", raiz->dado);
+        imprime_sim(raiz->dir);
+    }
+}
+
+void imprime_pos(nodo *raiz)
+{
+    if (raiz != NULL)
+    {
+        imprime_pos(raiz->esq);
+        imprime_pos(raiz->dir);
+        printf("Info: %d\n", raiz->dado);
+    }
+}
+/*
+void exclui_no_fim(nodo** inicio)
+{
+    if (*inicio == NULL)
+	{
+		printf("\nLista vazia");
+        return;
+    }//se a lista estiver vazia, avisa e retorna
+
+    if ((*inicio)->prox == NULL)
+	{
+		
+        free(*inicio);
+        *inicio = NULL;
+        return;
+    }//se a lista possuir um unico nodo, exclui a lista
+
+    nodo* aux = *inicio;
+    while (aux->prox->prox != NULL)
+	{
+        aux = aux->prox;
+    }//percorre a lista parando no penultimo nodo
+
+    free(aux->prox);
+    aux->prox = NULL;
+    //limpa o ultimo nodo e transforma o penultimo no fim da lista
+}
+*/

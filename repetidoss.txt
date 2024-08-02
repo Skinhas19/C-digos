@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TAM 100
+
+main () {       
+    char palavra[TAM], c;
+    int i = 0, aux = 0, contador = 0;
+
+    printf("Digite uma palavra: \n" );
+    while ((c=getchar())!= '\n'){
+        palavra[i]=c;
+        i++;        
+    }
+
+    palavra[i] = '\0';
+
+    i = 0;
+
+    while (palavra[i]!= '\0'){                  
+        if(palavra[i]==palavra[i]){
+            contador++;
+        }                              
+
+        printf ("%c = %d \n", palavra[i], contador);  
+        i++;
+    }
+}  

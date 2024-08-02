@@ -1,0 +1,114 @@
+//Nome:Lucas Santos Monteiro
+#include<stdio.h>
+#include<string.h>
+int chave (int valido)
+{
+
+    //verificacao chave funcao
+    char chave[10]={"-100ascii"};
+    char A[20];
+    int i=0;
+
+    printf("informe a regra para poder decodificar o codigo:");
+    fflush(stdin);
+
+    scanf("%[^\n]s",A);
+    i = (strcmp( chave, A));
+    //printf("%d",i);    0 ou -1
+    return i;
+	
+}
+
+
+void men(){
+	printf("\nEscolha uma das opcoes:\n");
+	printf("1 = Codificar a mensagem.\n");
+	printf("2 = Decodificar a mensagem.\n");
+	printf("9 = sair\n");
+
+}
+
+int main()
+{
+int done;
+int c = 4;
+char str[100];
+int menu=1;
+int valido,valor,qtd=0;
+
+do
+{
+    switch(c)
+    {
+    case 1: 
+    if(qtd==1)
+    {
+    	printf("decodifique a mensagem");
+    	c=4;
+	}
+	else
+	{
+	printf("\nDigite a mensagem a ser codificada:\n");
+    scanf(" %[^\n]s",str);
+	
+	for(int i = 0; (i < 100 && str[i] != '\0'); i++)
+    str[i] = str[i] + 100;
+    printf("\nMensagem codificada: %s\n", str);
+    qtd++;
+	c=4;
+	}
+        
+    break;
+
+    case 2: 
+	if(qtd==0)
+	{
+		printf("codifique a mensagem");
+		c=4;
+	}
+	else
+	{
+	valor = -1;
+    valor = chave(valor);
+	while(valor != 0)
+	{
+    printf("\nsenha incorreta,tente outra vez\n");
+    valor = chave(valor);
+	}
+	
+         
+    if(valor==0)	
+	{
+	printf("\nsenha correta\n ");
+	for(int i = 0; (i < 100 && str[i] != '\0'); i++)
+    str[i] = str[i] - 100; 
+    printf("\nMensagem decodificada: %s\n", str);
+    qtd--;
+    c=4;
+	}	
+	}
+
+        
+        
+        break;
+        case 4:
+        men();
+        fflush(stdin);
+        scanf("%d",&c);
+        
+        break;
+
+        case 9:
+        printf("FIM");
+        done = 9;
+        break;
+        
+        default: //loop para pegar o "case" certo
+        c=4;
+        break;
+    }
+    
+} 
+while (done!=9);
+return 0;
+}

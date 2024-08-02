@@ -1,0 +1,25 @@
+//Faça um programa usando ponteiros, para ordenar 5 números e mostrá­los ordenados na tela.
+
+#include <stdio.h>
+int main(void)
+{
+	int num=50,num1=40,num2=30,num3=20,num4=10,i;
+	int *pont;
+	
+	pont=&num;
+	pont=pont+1;
+	pont=&num1;
+	pont=pont+1;
+	pont=&num2;
+	pont=pont+1;
+	pont=&num3;
+	pont=pont+1;
+	pont=&num4;
+		
+	
+	
+		
+	
+	
+	
+}

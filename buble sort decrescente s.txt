@@ -1,0 +1,36 @@
+#include<stdio.h>
+void bolha_rec(int n, int vetor[]);
+int main(void)
+{
+	int n,vetor[6],i;
+	
+	for(i=0;i<6;i++)
+	{
+		printf("informe o numero pro vetor[%d]=:",i+1);
+		scanf("%d",&vetor[i]);
+		
+	}
+	n=6;
+	bolha_rec(n,vetor);
+	for(i=0;i<6;i++)
+	{
+		printf("\nvetor[%d]=%d:",i+1,vetor[i]);
+		
+		
+	}
+}
+void bolha_rec(int n, int vetor[])
+{
+int j;
+int troca;
+	for (j=0;j<n-1;j++)
+	if (vetor[j]<vetor[j+1]) 
+{
+	int temp = vetor[j]; // troca
+	vetor[j] = vetor[j+1];
+	vetor[j+1] = temp;
+	troca = 1;
+}
+	if (troca !=0) // houve a troca
+	bolha_rec(n-1,vetor);
+}

@@ -1,0 +1,21 @@
+#include <stdio.h>
+int recursiva(int n);
+int main(void)
+{
+	int n;
+	scanf("%d",&n);
+	printf("soma=%d",recursiva(n));
+}
+int recursiva(int n)
+{
+	int soma;
+	if(n==1)
+	{
+	return 1;
+	}
+	else
+	{
+	soma=(n - 1)*recursiva(n - 1);
+	}
+	return soma;
+}

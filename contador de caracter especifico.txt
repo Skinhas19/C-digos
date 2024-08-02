@@ -1,0 +1,19 @@
+#include <stdio.h>
+int main(void)
+{
+	char string[40],conceito;
+	int i,contador=0;
+	printf("conceito:");
+	scanf("%c",&conceito);
+	printf("string=");
+	scanf("%s",string);
+	while(string[i]!='\0')
+	{
+	if(string[i]==conceito)
+	{
+		contador++;
+	}
+	i++;
+}
+	printf("contador=%d",contador);
+}

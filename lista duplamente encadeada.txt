@@ -1,0 +1,383 @@
+//Nome: Luiz  Eduardo Colombo Teixeira Soares,Lucas Santos Monteiro e Natan Manique.
+
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct nodo
+{
+int dado;
+struct nodo* ant;
+struct nodo* prox;
+} nodo;
+
+void insere_no_inicio(nodo** inicio, int valor);
+void insere_no_fim(nodo** inicio, int valor);
+void insere_antes_de_k(nodo** inicio, int valor,int k);
+void exclui_no_inicio(nodo** inicio);
+void exclui_no_fim(nodo** inicio);
+void exclui_k(nodo** inicio,int k);
+void imprime_lista(nodo* inicio);
+int localiza_k(nodo* lista, int k,int log=0);
+void exclui_lista(nodo** lista);
+void ciclar(nodo* lista);
+
+int main()
+{
+nodo* lista1 = NULL;
+
+int op=1, valor, k;
+
+while (op != 0)
+{
+	printf("\nMenu:");
+	printf("\n1 - Insere no inicio da lista");
+	printf("\n2 - Imprime lista1");
+	printf("\n3 - Exclui k");
+	printf("\n4 - Ciclar ");
+	printf("\n5 - Exclui inicio ");
+	printf("\n6 - Exclui fim ");
+	printf("\n7 - Insere fim ");
+	printf("\n8 - Insere em k ");
+	printf("\nEscolha uma opcao: ");
+	
+	scanf("%d", &op);
+	
+		switch (op)
+		{
+			case 1:
+				printf("\nDigite o valor a ser inserido: ");
+				scanf("%d", &valor);
+				insere_no_inicio(&lista1,valor);
+				break;
+			
+			case 2:
+				imprime_lista(lista1);
+				break;
+						
+			case 3:
+				printf("\nDigite o valor a ser exluido: ");
+				scanf("%d", &valor);
+				exclui_k(&lista1, valor);
+				break;
+			case 4:
+				ciclar(lista1);
+				break;
+				
+			case 5:
+				exclui_no_inicio(&lista1);
+				break;
+				
+			case 6:
+				exclui_no_fim(&lista1);
+				break;
+				
+			case 7:
+				printf("\nDigite o valor a ser inserido: ");
+				scanf("%d", &valor);
+				insere_no_fim(&lista1,valor);
+				break;
+				
+			case 8:
+				printf("\nDigite o valor a ser inserido: ");
+				scanf("%d", &valor);
+				printf("\nDigite o valor a ser encontrado: ");
+				scanf("%d", &k);
+				insere_antes_de_k(&lista1, valor, k);
+				break;
+			
+			case 0:
+				printf("\nSaindo...");
+				break;
+			
+			default:
+			printf("\n Entrada invalida.\n");
+		}
+} 
+}
+
+//=================================
+//=================================
+//=================================
+//=================================
+
+void imprime_lista(nodo* inicio)
+{
+	nodo* p = inicio;
+	
+	if(p == NULL)
+	{
+		printf("\nLista vazia");
+		return;
+	}//se a lista estiver vazia, avisa e retorna
+	
+	printf("Lista: \n");
+	while (p != NULL)
+	{
+		printf("DADO: %d, ANT: %p, MEM: %p, PROX: %p\n", p->dado, p->ant, p, p->prox);
+		p = p->prox;
+	}//enquanto p não for nulo, percorre a lista imprimindo as informações da lista
+	//printf("\n");
+}
+
+void insere_no_inicio(nodo** inicio, int valor)
+{
+	nodo* p = (nodo*)malloc(sizeof(nodo));
+	nodo* aux = *inicio;
+	
+	if (p == NULL)
+	{
+		printf("\nErro ao alocar memoria.");
+	}
+	
+	p->dado = valor;
+	p->prox = NULL;
+	p->ant = NULL;
+	
+	if (*inicio==NULL)
+	{
+		*inicio = p;
+		return;
+	}//se a lista estiver vazia o nó se torna a nova lista
+	else
+	{
+		(*inicio)->ant = p;
+        p->prox = *inicio;
+        *inicio = p;
+        return;
+    }//encadeia o novo nodo com o inicio e transforma o novo nodo no inicio
+}
+
+void insere_no_fim(nodo** inicio, int valor)
+{
+	nodo* p = (nodo*)malloc(sizeof(nodo));
+	
+	if (p == NULL)
+	{
+		printf("\nErro ao alocar memoria.");
+	}
+	
+	p->dado = valor;
+	p->prox = NULL;
+	
+	if (*inicio == NULL)
+	{
+		*inicio = p;
+		return;
+	}//se a lista estiver vazia o nó se torna a nova lista
+	nodo* aux = *inicio;
+	while (aux->prox != NULL)
+	{
+		aux = aux->prox;
+	}//percorre a lista até chegar no último nodo
+	
+	aux->prox = p;//faz o próximo do último nodo apontar pro novo fim
+	p->ant = aux;
+}
+
+void insere_antes_de_k(nodo** inicio, int valor, int k)
+{
+	nodo* p = (nodo*)malloc(sizeof(nodo));
+	nodo* aux = *inicio;
+	
+	if (p == NULL)
+	{
+		printf("\nErro ao alocar memoria.");
+	}
+	
+	if (aux==NULL)
+	{
+		printf("\nLista vazia.");
+		return;
+	}//se a lista estiver vazia, avisa e retorna
+	
+	p->dado = valor;
+	
+    if (aux->dado == k)
+	{
+        p->prox = *inicio;
+        *inicio = p;
+        (*inicio)->prox = p;
+        return;
+    }//se o primeiro termo for k, insere no inicio
+
+    while (aux->prox != NULL)
+	{
+        if (aux->prox->dado == k)
+		{
+            p->prox = aux->prox;
+            aux->prox->ant = p;
+            aux->prox = p;
+            p->ant = aux;
+            return;
+        }//se encontrar k, insere o valor antes
+        aux = aux->prox;
+    }//percorre a lista
+	printf("\nk nao encontrado.");
+	return;
+}
+
+void exclui_no_inicio(nodo** inicio)
+{
+    if (*inicio == NULL)
+	{
+        printf("\nLista vazia.");
+        return;
+    }//se a lista estiver vazia, avisa e retorna
+
+    nodo* aux = *inicio;
+    
+    *inicio = (*inicio)->prox;
+    (*inicio)->prox->ant = NULL;
+    
+    free(aux);
+    //transforma o inicio no segundo nodo (ou em nulo se for uma lista de um nodo) e exclui o primeiro nodo
+}
+
+void exclui_no_fim(nodo** inicio)
+{
+    if (*inicio == NULL)
+	{
+		printf("\nLista vazia");
+        return;
+    }//se a lista estiver vazia, avisa e retorna
+
+    if ((*inicio)->prox == NULL)
+	{
+		
+        free(*inicio);
+        *inicio = NULL;
+        return;
+    }//se a lista possuir um unico nodo, exclui a lista
+
+    nodo* aux = *inicio;
+    while (aux->prox->prox != NULL)
+	{
+        aux = aux->prox;
+    }//percorre a lista parando no penultimo nodo
+
+    free(aux->prox);
+    aux->prox = NULL;
+    //limpa o ultimo nodo e transforma o penultimo no fim da lista
+}
+
+void exclui_k(nodo** inicio, int k)
+{
+    if (*inicio == NULL)
+	{
+        printf("\nLista vazia");
+        return;
+    }//se a lista estiver vazia, avisa e retorna
+
+    if ((*inicio)->dado == k)
+	{
+        nodo* temp = *inicio;
+        *inicio = (*inicio)->prox;
+        free(temp);
+        return;
+    }//se o primeiro nodo for k, exclui o primeiro nodo e transforma o segundo nodo no inicio.
+
+    nodo* aux = *inicio;
+    while (aux->prox != NULL && aux->prox->dado != k)
+	{
+        aux = aux->prox;
+    }//percorre a lista até chegar no fim ou em k
+
+    if (aux->prox == NULL)
+	{
+        printf("\nA lista nao possui nenhum elemento k=%d.", k);
+        return;
+    }//se não achar k, retorna e avisa
+
+    nodo* temp = aux->prox;
+    aux->prox = aux->prox->prox;
+    aux->prox->prox->ant = aux;
+    free(temp);//se chegar aqui significa que estamos k, excluindo o nodo anterior e encadeando a lista.
+}
+
+int localiza_k(nodo* lista, int k,int log)
+{
+    nodo* aux = lista;
+
+    if (aux == NULL)
+	{
+        printf("\nLista vazia.");
+        return NULL;
+    }//se a lista estiver vazia, avisa e retorna
+    
+    while (aux != NULL)
+	{
+    	
+	    if (aux->dado == k)
+			{
+				if(log==1)
+				{
+					
+				 	printf("Valor de k: %d\n", aux->dado);
+			        //printf("k encontrado no endereco: %p\n", aux);
+			        printf("DADO: %d, MEM: %p,", aux->dado, aux);
+			        if (aux->prox != NULL)
+					{
+			            printf(" PROX: %p\n", aux->prox);
+			        }
+					else
+					{
+			            printf(" FIM DA LISTA\n");
+			        }
+		    	}
+		        return 1;
+	       	}//se o dado do nodo for igual a k, printa (caso log seja 1) e retorna o nodo com k
+       		
+        aux = aux->prox;
+    }//percorre a lista
+	 printf("\nA lista nao possui nenhum elemento k=%d.", k);
+	 return NULL;//se a lista não possuir k, avisa e retorna
+}
+
+void exclui_lista(nodo** lista)
+{
+	if((*lista)==NULL)
+	{
+		printf("\nA lista ja esta vazia");
+		return;
+	}//se a lista estiver vazia, avisa e retorna
+	while((*lista)!=NULL)
+	{
+		nodo* aux = *lista;
+		*lista = (*lista)->prox;
+		exclui_no_inicio(&aux);
+	}
+	lista=NULL;
+	printf("\nA lista foi excluida com sucesso");
+	return;
+};
+
+void ciclar(nodo* inicio)
+{
+	nodo* p = inicio;
+	int count = 0, i, achou = 1;
+	if(p == NULL)
+	{
+		printf("\nLista vazia");
+		return;
+	}
+	
+	printf("\nlista 1:\n");
+	while (p != NULL && achou)
+	{
+        if (p->prox == NULL) {
+          	p->prox=inicio;
+          	inicio->ant = p;
+           	achou = 0;
+        }
+		p = p->prox;
+		count++;
+	}//imprime a lista, quando chega no ultimo, encadeia o mesmo com o primeiro nodo (se tentar imprimir com a função normal depois, quebra o programa)
+	//printf("\n");
+	for(i = 0; i < count; i++)
+	{
+		printf("DADO: %d, ANT: %p, MEM: %p, PROX: %p\n", p->dado, p->ant, p, p->prox);
+		p = p->prox;
+	}
+	return;
+}
+

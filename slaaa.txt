@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int SomaSerie(int i, int j, int k){
+	int soma = 0;
+	if(i<j){
+	      soma =soma+ SomaSerie(i + k, j, k);
+	}else{
+	      return soma = soma + j;
+	}
+}
+
+int main(){
+	int i, j, k;
+	
+	printf("\nInforme o intervalo fechado [i, j]: ");
+	scanf("[%d, %d]", &i, &j);
+
+	printf("\nInforme k: ");
+	scanf("%d", &k);
+
+	printf("\n");
+	printf("Soma = %d", SomaSerie(i, j, k));
+
+	return 0;
+}

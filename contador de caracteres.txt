@@ -1,0 +1,16 @@
+#include <stdio.h>
+int main(void)
+{
+	char string[40];
+	int numcarecteres;
+	
+	
+	printf("string:");
+	scanf("%s",string);
+	
+	while(string[numcarecteres]!='\0')
+	{
+		numcarecteres++;
+	}
+	printf("numcarecteres=%d",numcarecteres);
+}

@@ -1,0 +1,18 @@
+#include <stdio.h>
+int main(void)
+
+{
+	int x,*ptrx,**pptrx;
+	
+	x=0;
+	printf("valor de x=%d",x);
+	printf("\nendereco de x=%d",&x);
+	
+	ptrx=&x;
+	pptrx=&ptrx;
+	printf("\nptrx=%d",ptrx);
+	printf("\n%d",&ptrx);
+	printf("\nptrx=%d",*ptrx);
+	printf("pptrx=%d",**pptrx);
+	
+}

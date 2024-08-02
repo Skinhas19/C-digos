@@ -1,0 +1,21 @@
+#include <stdlib.h>
+#include <stdio.h>
+typedef struct nodo {
+int dados;
+struct nodo *proximo;
+} inicio, fim;
+
+int main(){
+nodo *fim=NULL;
+nodo *inicio= NULL;
+inicio = (struct nodo *) malloc (sizeof(struct nodo));
+if (inicio)
+{
+inicio->dados = 5;
+inicio->proximo = NULL;
+fim = inicio;
+printf("Ponteiro:%d\t valor:%d\t proximo:%d\n",inicio,inicio->dados,inicio->proximo);
+system("pause");
+return 0;
+}
+}

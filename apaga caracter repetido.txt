@@ -1,0 +1,34 @@
+//Crie uma função que retira todas os caracteres repetidos de uma string. Imprima a string resultante.
+#include <stdio.h>
+#include <string.h>
+int main(void)
+{
+	char string[40];
+	int i,tamnum,j;
+	
+	printf("string=");
+	scanf("%s",string);
+	
+	tamnum=strlen(string);
+	
+	for(i=0;i<tamnum;i++)
+	{
+	for(j=0;j<tamnum;j++)
+	{
+	
+		if(string[i]==string[j] && j!=i)
+		{
+			j = i;
+            while(j <tamnum)
+            {
+                string[j] = string[j + 1];
+                j++;
+            }
+            tamnum--;
+            i--; 
+		}
+	
+	}
+}
+	printf("%s",string);
+}

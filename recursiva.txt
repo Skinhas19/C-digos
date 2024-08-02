@@ -1,0 +1,26 @@
+//3) Escreva uma função recursiva que faça o seguinte: leia um número; se o número for
+//negativo, a função para; caso contrário, a função imprime o número e faz uma
+//chamada recursiva a si mesma.
+#include <stdio.h>
+int funcao(int numero);
+int main(void)
+{
+	int numero;
+	printf("numero=");
+	scanf("%d",&numero);
+	funcao(numero);
+}
+int funcao(int numero)
+{
+	if(numero<0)
+	{
+		return 0;
+	}
+	else
+	{
+		printf("numero=%d",numero);
+		numero=-1;
+		funcao(numero);
+		
+	}
+}

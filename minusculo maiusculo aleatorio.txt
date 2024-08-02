@@ -1,0 +1,31 @@
+//Crie uma função que recebe uma string e transforma alguns dos caracteres em maiúsculos e outros em minúsculos. 
+//Faça sorteios com a função rand() para gerar números aleatórios em C, que serão usados para escolher os índices dos caracteres que serão alterados.
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <conio.h>
+#include <stdlib.h>
+int converte(char string[]);
+int main(void)
+{
+	char string[20];
+	
+	printf("string=");
+	scanf("%s",string);
+	converte(string);
+}
+int converte(char string[])
+{
+	int i,tamnum,j;
+	tamnum=strlen(string);
+	
+	for(i=0;i<tamnum;i++)
+	{
+		string[i]=tolower(string[i]);
+		string[i+1]=toupper(string[i+1]);
+		i++;
+	}
+	
+	
+	printf("string=%s",string);
+}

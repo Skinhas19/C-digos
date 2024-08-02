@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main(void)
+{
+	int *v;
+	int num,i;
+	FILE *ptr;
+	
+	ptr = fopen("vetor.txt", "r");
+	
+	
+	if (ptr == NULL)
+  	{
+    printf("Erro ao abrir o arquivo!\n");
+    printf("Saindo do programa...\n");
+    system("pause");
+    exit(1);//abortando o programa
+  	}
+  	fscanf(ptr,"%d ",&num);
+  
+  	v=(int*)(malloc(num*sizeof(int)));
+  
+  	for(i=0;i<num;i++)
+	{
+	fscanf(ptr,"%d ",&v[i]);
+	}	
+	fclose(ptr);
+	
+	for(i=0;i<num;i++)
+	{
+		printf("%d",v[i]);
+	}
+	
+	free(v);
+	 	
+}

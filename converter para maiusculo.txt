@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <conio.h>
+int main(void)
+
+{
+	char string[20];
+	int TamStr,i;
+	
+	printf("string=");
+	scanf("%s",string);
+	
+	TamStr = strlen(string);
+	
+	for(i=0; i<TamStr; i++)
+    {                            // Converte cada caracter de Str
+     string[i]=toupper(string[i]);  // para maiusculas
+    }
+    printf("%s",string);
+}

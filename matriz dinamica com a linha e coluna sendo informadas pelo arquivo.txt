@@ -1,0 +1,17 @@
+//matriz dinamica
+#include <stdio.h>
+#include <stdlib.h>
+int main(void)
+{
+	file *matriz_dinamica;
+	
+	printf("informe o numero de linhas");
+	scanf("%d",&i);
+	printf("informe o numero de colunas");
+	scanf("%d",&j);
+	farq =fopen(arq,"wt");
+	fprintf(farq,"%d\n",i);
+	fprintf(farq,"%d\n",j);
+	
+	
+}

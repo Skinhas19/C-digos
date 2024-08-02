@@ -1,0 +1,28 @@
+//Crie uma função que mostra os caracteres de uma string são repetidos.
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <conio.h>
+int main(void)
+{
+	char string[40];
+	char letrasrepetidas[20];
+	int i,tamnum,j;
+	
+	printf("string=");
+	scanf("%s",string);
+	
+	tamnum=strlen(string);
+	for(i=0;i<tamnum;i++)
+	{
+	for(j=0;j<tamnum;j++)
+	{
+	
+	if(string[i]==string[j] && j!=i && (strchr(letrasrepetidas, string[j])== NULL))
+	{
+	strncat(letrasrepetidas,&string[j], 1);
+	}
+}
+}
+	printf("%s",letrasrepetidas);
+}

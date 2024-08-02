@@ -1,0 +1,26 @@
+//Elabore um programa com o uso de uma função recursiva para resolver a seguinte expressão f(n) = n * (1/n) * (1/n-1).....
+//Observe n> 0
+
+#include <stdio.h>
+float f (float n);
+int main()
+
+{
+    float num;
+    printf("Informe o número:   ");
+    scanf ("%f", &num);
+   
+    printf (" \nO valor  é  %f  ", f (num));
+}
+float f (float n )
+{
+    float result;
+    if (n==1)
+    {
+        return 1 ;
+    }
+    else
+    {
+        return result = (((1/(n-1))*(f (n-1))));
+    }
+}

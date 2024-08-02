@@ -1,0 +1,41 @@
+//Elabore um programa que lê do teclado 2 valores inteiros no main e posteriormente descreva uma função recursiva potenciaRec(x,y) que retorne o valor de XY.  
+//Observe as regras da potência e não utilize a função pow da biblioteca math.h
+#include <stdio.h>
+int potenciaRec(int x,int y);
+int main(void)
+{
+	int x,y;
+	
+	
+	printf("informe o valor de x:");
+	scanf("%d",&x);
+	
+	printf("informe o valor de y:");
+	scanf("%d",&y);
+	
+	potenciaRec(x,y);
+}
+int potenciaRec(int x,int y)
+{
+	int valor=0;
+	
+	valor=x;
+	if(y==0)
+	{
+		valor=1;
+	}
+	if(y==1)
+	{
+		valor=x;
+	}
+	else
+	{
+	
+	while(y>1)
+	{
+		valor=valor*x;
+		y--;
+	}
+}
+	printf("valor=%d",valor);
+}

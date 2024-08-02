@@ -1,0 +1,35 @@
+//Escreva uma função mm que receba um vetor inteiro v[0..n-1] e os endereços de duas variáveis inteiras, digamos min e max, 
+//e deposite nessas variáveis o valor de um elemento mínimo e o valor de um elemento máximo do vetor. Escreva também uma função main que use a função mm.
+#include <stdio.h>
+int mm(int vetor[],int *min,int *max);
+int main(void)
+
+{
+	int vetor[6],min=132135134,max=0,i;
+	
+	for(i=0;i<6;i++)
+	{
+		printf("informe numero do vetor %d:",i+1);
+		scanf("%d",&vetor[i]);
+	}
+	mm(vetor,&min,&max);
+	printf("minimo=%d e maximo=%d",min,max);
+	
+}
+int mm(int vetor[],int *min,int *max)
+{
+	int i,j;
+	
+	for(i=0;i<6;i++)
+	{
+	if(vetor[i]>*max)
+	{
+	*max=vetor[i];
+	}
+	if(vetor[i]<*min)
+	{
+	*min=vetor[i];
+	}
+	}
+	
+}

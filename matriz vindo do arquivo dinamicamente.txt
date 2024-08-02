@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main(void)
+{
+	FILE *ptr;
+	int **matriz1,i,j,n_linhas,n_colunas;
+	
+	ptr = fopen("matriz.txt", "r");
+	if (ptr == NULL)
+  	{
+    printf("Erro ao abrir o arquivo!\n");
+    printf("Saindo do programa...\n");
+    system("pause");
+    exit(1);//abortando o programa
+  	}
+	fscanf(ptr,"%d %d",&n_linhas,&n_colunas);
+	matriz1=(int**)calloc(n_linhas,sizeof(int*));
+	for(i=0;i<n_linhas;i++)
+	{
+		matriz1[i]=(int*)calloc(n_colunas,sizeof(int));
+	}
+	for(i=0;i<n_linhas;i++)
+	{
+	for(j=0;j<n_colunas;j++)
+	{
+		fscanf(ptr,"%d",&matriz1[i][j]);
+	}
+	}
+	fclose(ptr);
+	for(i=0;i<n_linhas;i++)
+	{
+	for(j=0;j<n_colunas;j++)
+	{
+		printf("\nmatriz[%d][%d]=%d",i,j,matriz1[i][j]);
+	}
+	}
+	
+}

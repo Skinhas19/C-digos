@@ -1,0 +1,42 @@
+/******************************************************************************
+Programa para criar arquivo tipo texto e gravar nome de pessoa e idade
+A leitura e gravação de pessoas no arquivo vai até que  o nome fim seja digitado pelo teclado
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <string.h>
+//#include <conio.h>
+
+ int main()
+{
+    char nome_arq[15], nome[20];
+    int idade;
+    FILE *farq;
+    
+    printf("Digite o nome do arquivo");
+    scanf ("%s", nome_arq);
+    fflush (stdin);
+    
+    farq = fopen(nome_arq, "wt");
+    if (farq == NULL)
+    {
+        printf ("impossível abrir o aqrivo");
+    }
+    else
+    {
+        printf ("Digite o nome da pessoa");
+        scanf ("%s", nome);
+        fflush(stdin);
+        while (strcmp (nome, "fim") != 0)
+        {
+            printf ("\n Digite a idade da pessoa");
+            scanf ("%d", &idade);
+            fprintf (farq, "%s;%d \n", nome, idade);
+            printf ("Digite o nome da pessoa");
+            scanf ("%s", nome);
+            fflush(stdin);
+        }  
+        fclose (farq);
+    }       
+ }

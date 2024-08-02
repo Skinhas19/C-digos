@@ -1,0 +1,163 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Implementar uma Lista
+
+typedef struct no
+{
+    int info;
+    struct no *prox;
+}nodo;
+
+int menu();
+void imprime (nodo *prim);
+void insere_fim (int val, nodo **prim, nodo *p);
+void insere_inicio(int val, nodo **prim, nodo *p);
+void retira_fim (nodo **prim);
+
+int main()
+{
+   int opcao, valor;
+   nodo *inicio, *lista;
+   inicio = NULL;
+   opcao = menu();
+   
+   while (opcao != 8)
+   {
+      switch (opcao)
+      {
+          
+          case 1: lista = (nodo *) malloc (sizeof(nodo));
+                  if (lista == NULL)
+                {
+                    printf ("\n Falta espaço de memoria");
+                }
+                else
+                {
+                    printf ("\n Informe o valor ");
+                    scanf ("%d", &valor);
+                    insere_inicio (valor, &inicio, lista);
+                }    
+                break;
+          case 3:
+                lista = (nodo *) malloc (sizeof(nodo));
+                if (lista == NULL)
+                {
+                    printf ("\n Falta espaço de memoria");
+                }
+                else
+                {
+                    printf ("\n Informe o valor ");
+                    scanf ("%d", &valor);
+                    insere_fim (valor, &inicio, lista);
+                }    
+                break;
+          case 4: imprime (inicio);
+                  break;
+          case 7: retira_fim (&inicio);
+                  break;
+      }
+      opcao = menu();
+   }  
+}
+void imprime (nodo *prim)
+{
+    nodo *paux;
+    paux = prim;
+    
+    if (prim == NULL)
+    {
+        printf ("\nlista vazia");
+    }
+    else
+    {
+        while (paux != NULL)
+        {
+             printf ("\n elemento da lista = %d", paux->info);
+             paux = paux->prox;
+        }     
+    }
+}
+
+int menu()
+{
+    int op;
+    printf ("\n1 - Insere no inicio");
+    printf ("\n2 - Insere no meio");
+    printf ("\n3 - Insere no fim");
+    printf ("\n4 - Imprime lista");
+    printf ("\n5-  Remove do inicio");
+    printf ("\n6-  Remove um elemento qualquer");
+    printf ("\n7- Remove no fim");
+    printf ("\n8- Fim ");
+    printf ("\n Informe a opção desejada ");
+    scanf ("%d", &op);
+    
+    while (op <= 0 || op > 8)
+    {
+        printf ("\nInforme a opcao do menu ");
+        scanf ("%d", &op);
+    }
+    
+    return op;
+ }
+
+
+void insere_inicio(int val, nodo **prim, nodo *p)
+    {
+        p->prox = *prim;
+        p->info = val;
+        *prim = p;
+        
+    }
+
+ void insere_fim(int val, nodo **prim, nodo *p)
+    {
+        nodo *paux;
+        p->info = val;
+        p->prox = NULL;
+        if (*prim == NULL)
+            *prim = p;
+        else
+        {
+            paux = *prim;
+            while (paux->prox != NULL)
+            {
+                paux = paux->prox;
+            }
+            paux->prox = p;
+         }
+         printf ("\nfim funcao insere fim\n");
+
+         
+    }   
+	void retira_fim (nodo **prim)
+{
+   
+    nodo *ant, *paux;
+    paux = *prim;
+    ant = NULL;
+
+    if (paux == NULL)
+    {
+        printf ("impossível remover Lista vazia");
+    }
+    else
+    {
+        while (paux->prox != NULL)
+        {
+            ant = paux;
+            paux = paux->prox;
+        }
+       
+        printf ("\n valor retirado %d ", paux->info);
+        if (ant != NULL)
+        {
+           ant->prox = NULL;
+        }
+        else
+        {
+            *prim = NULL;
+		}
+	}
+}
